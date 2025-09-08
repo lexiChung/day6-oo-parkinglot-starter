@@ -2,7 +2,7 @@ package com.afs.parkinglot;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingLotTest {
     @Test
@@ -13,5 +13,14 @@ class ParkingLotTest {
         assertNotNull(ticket);
     }
 
-
+    @Test
+    void should_throw_exception_when_parking_given_full_lot_and_car(){
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car car1 = new Car();
+        parkingLot.parking(car1);
+        Car car2 = new Car();
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            parkingLot.parking(car2);});
+        assertEquals("No available position.", exception.getMessage());
+    }
 }
