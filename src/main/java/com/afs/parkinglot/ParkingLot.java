@@ -20,4 +20,12 @@ public class ParkingLot {
         capacity--;
         return ticket;
     }
+
+    public Car fetching(Ticket ticket) {
+        if(!ticketCarMap.containsKey(ticket)) throw new RuntimeException("Unrecognized parking ticket.");
+        Car car = ticketCarMap.get(ticket);
+        ticketCarMap.remove(ticket);
+        capacity++;
+        return car;
+    }
 }

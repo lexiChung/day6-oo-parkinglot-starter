@@ -23,4 +23,14 @@ class ParkingLotTest {
             parkingLot.parking(car2);});
         assertEquals("No available position.", exception.getMessage());
     }
+
+    @Test
+    void should_return_car_when_fetching_given_lot_and_ticket(){
+        ParkingLot parkingLot = new ParkingLot(10);
+        Car car = new Car();
+        Ticket ticket = parkingLot.parking(car);
+        Car fetchedCar = parkingLot.fetching(ticket);
+        assertEquals(car, fetchedCar);
+    }
+    
 }
