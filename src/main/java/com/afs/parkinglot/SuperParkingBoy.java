@@ -26,4 +26,12 @@ public class SuperParkingBoy {
         }
         return selectedParkingLot.parkingWithLot(car, selectedParkingLot);
     }
+
+    public Car fetching(Ticket ticket) {
+        ParkingLot parkingLot = ticket.getParkingLot();
+        if (parkingLot == null || !parkingLots.contains(parkingLot)) {
+            throw new RuntimeException("Unrecognized parking ticket.");
+        }
+        return parkingLot.fetching(ticket);
+    }
 }
