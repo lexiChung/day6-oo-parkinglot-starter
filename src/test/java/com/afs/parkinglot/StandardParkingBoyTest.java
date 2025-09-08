@@ -48,5 +48,16 @@ public class StandardParkingBoyTest {
         });
         assertEquals("No available position.", exception.getMessage());
     }
+
+    @Test
+    void should_throw_exception_when_fetching_given_parking_wrong_ticket() {
+        ParkingLot parkingLot = new ParkingLot(10);
+        StandardParkingBoy parkingBoy = new StandardParkingBoy(parkingLot);
+        Ticket invalidTicket = new Ticket();
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            parkingBoy.fetching(invalidTicket);
+        });
+        assertEquals("Unrecognized parking ticket.", exception.getMessage());
+    }
 }
 
