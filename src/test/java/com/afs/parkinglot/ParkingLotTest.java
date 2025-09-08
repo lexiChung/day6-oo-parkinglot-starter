@@ -52,4 +52,15 @@ class ParkingLotTest {
             parkingLot.fetching(ticket);});
         assertEquals("Unrecognized parking ticket.", exception.getMessage());
     }
+
+    @Test
+    void should_return_right_car_when_fetching_given_multiple_car(){
+        ParkingLot parkingLot = new ParkingLot(5);
+        Car car = new Car();
+        Ticket ticket = parkingLot.parking(car);
+        Car car1 = new Car();
+        Ticket ticket1 = parkingLot.parking(car1);
+        assertEquals(car, parkingLot.fetching(ticket));
+        assertEquals(car1, parkingLot.fetching(ticket1));
+    }
 }
