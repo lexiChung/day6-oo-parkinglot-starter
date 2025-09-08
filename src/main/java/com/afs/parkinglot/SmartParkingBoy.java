@@ -25,4 +25,13 @@ public class SmartParkingBoy {
         }
         return selectedParkingLot.parkingWithLot(car,selectedParkingLot);
     }
+
+    public Car fetching(Ticket ticket) {
+        for (ParkingLot parkingLot : parkingLots) {
+            try {
+                return parkingLot.fetching(ticket);
+            } catch (RuntimeException e) {}
+        }
+        throw new RuntimeException("Unrecognized parking ticket.");
+    }
 }
