@@ -5,12 +5,12 @@ import java.util.Map;
 
 public class ParkingLot {
     private int TotalCapacity;
-    private int capacity;
+    private int availableCapacity;
     private Map<Ticket,Car> ticketCarMap = new HashMap<>();
 
-    public ParkingLot(int capacity) {
-        this.capacity = capacity;
-        this.TotalCapacity = capacity;
+    public ParkingLot(int availableCapacity) {
+        this.availableCapacity = availableCapacity;
+        this.TotalCapacity = availableCapacity;
     }
 
     public int getTotalCapacity() {
@@ -18,19 +18,19 @@ public class ParkingLot {
     }
 
     public Ticket parking(Car car) {
-        if(capacity<=0) throw new RuntimeException("No available position.");
+        if(availableCapacity <=0) throw new RuntimeException("No available position.");
         Ticket ticket = new Ticket();
         ticketCarMap.put(ticket,car);
-        capacity--;
+        availableCapacity--;
         return ticket;
     }
 
     public Ticket parkingWithLot(Car car,ParkingLot parkingLot) {
-        if(capacity<=0) throw new RuntimeException("No available position.");
+        if(availableCapacity <=0) throw new RuntimeException("No available position.");
         Ticket ticket = new Ticket();
         ticket.setParkingLot(parkingLot);
         ticketCarMap.put(ticket,car);
-        capacity--;
+        availableCapacity--;
         return ticket;
     }
 
@@ -38,11 +38,11 @@ public class ParkingLot {
         if(!ticketCarMap.containsKey(ticket)) throw new RuntimeException("Unrecognized parking ticket.");
         Car car = ticketCarMap.get(ticket);
         ticketCarMap.remove(ticket);
-        capacity++;
+        availableCapacity++;
         return car;
     }
 
     public int getAvailablePosition() {
-        return capacity;
+        return availableCapacity;
     }
 }
